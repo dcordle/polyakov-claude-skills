@@ -1,133 +1,133 @@
-# Как довести задачу до результата через интерфейс
+# How to get a task done through the interface
 
-Если нужное действие отсутствует в командах скилла или API, подготовьте всё необходимое для его выполнения человеком. Это относится к созданию кампаний, настройке целей, работе с материалами и любым другим ручным шагам. Ниже приведён общий порядок и пример для Мастера кампаний.
+If the needed action is missing from the skill's commands or the API, prepare everything a person needs to do it. This applies to creating campaigns, setting up goals, working with assets, and any other manual step. Below is the general procedure and an example for the Campaign Wizard.
 
-## Передача ручного шага
+## Handing off a manual step
 
-Сначала объясните, какой результат нужен и почему выбрана эта настройка. Проверьте, можно ли выполнить её имеющимися командами. Отсутствие готовой команды и отсутствие возможности в API — разные ограничения: называйте фактическую причину.
+First explain what result is needed and why this setting was chosen. Check whether it can be done with the existing commands. The lack of a ready-made command and the lack of an API capability are different limitations: name the actual reason.
 
-Дайте человеку инструкцию, которую можно выполнить без самостоятельной разработки рекламной кампании:
+Give the person instructions they can follow without designing an ad campaign themselves:
 
-1. **Что открыть.** Сервис, кабинет, конкретная кампания или счётчик, путь к разделу. Названия кнопок сверяйте с действующей справкой или доступным интерфейсом. Если путь изменился, уточните текущее расположение, не придумывайте его.
-2. **Что ввести.** Подготовленные тексты, ссылки, файлы, список целей с ID, значения параметров. Недостающие данные обозначайте явно: «Недельный бюджет не задан — нужно выбрать сумму». Не заполняйте их случайными числами.
-3. **Зачем это нужно.** Одно короткое объяснение для существенной настройки: какой результат она улучшает или какое ограничение задаёт.
-4. **Что произойдёт после нажатия.** Сохранение черновика, отправка на модерацию, изменение работающей рекламы или начало расходования средств.
-5. **Как проверить результат.** Ожидаемое значение после сохранения, событие в Метрике, статус кампании или строка отчёта. Укажите, кто выполняет проверку и какие сведения нужно вернуть агенту.
+1. **What to open.** The service, the account, the specific campaign or counter, the path to the section. Check button names against the current help or the interface you can access. If the path has changed, look up the current location; do not invent one.
+2. **What to enter.** Prepared texts, links, files, the list of goals with IDs, parameter values. Mark missing data explicitly: "Weekly budget is not set: an amount must be chosen". Do not fill it in with random numbers.
+3. **Why it is needed.** One short explanation for any significant setting: which result it improves or which limit it sets.
+4. **What happens after the click.** Saving a draft, sending to moderation, changing running ads, or starting to spend money.
+5. **How to check the result.** The expected value after saving, an event in Metrica, the campaign status, or a report row. State who performs the check and what information must be returned to the agent.
 
-Подготовьте материалы и таблицу итоговых настроек до передачи ручного шага. Уже согласованные в разговоре цели и значения используйте повторно. Если запуск входит в поручение и параметры определены, не добавляйте ещё одно согласование без причины. Если поручена только подготовка, оставьте результат готовым к запуску и ясно обозначьте завершающее действие.
+Prepare the assets and the table of final settings before handing off the manual step. Reuse goals and values already agreed in the conversation. If launching is part of the assignment and the parameters are defined, do not add another approval without a reason. If only preparation was requested, leave the result ready to launch and clearly mark the final action.
 
-После ручного выполнения проверьте доступную статистику или сохранённые настройки. Не называйте действие выполненным, если подготовлена только инструкция.
+After the manual step is done, check the available statistics or the saved settings. Do not call the action done if only the instructions were prepared.
 
-## Пример: Мастер кампаний для продвижения сайта
+## Example: Campaign Wizard (Мастер кампаний) for promoting a website
 
-Этот пример подходит, когда нужна автоматическая кампания для получения выбранных пользователем целевых действий на сайте. Текущие команды скилла не создают такие кампании; статистику после создания можно получать через Reports. Возможности самого инструмента описаны в [справке Мастера кампаний](https://yandex.ru/support/direct/ru/campaign-master/about).
+This example fits when an automatic campaign is needed to get the target actions on the site that the user has chosen. The skill's current commands do not create such campaigns; statistics after creation can be pulled through Reports. The tool's own capabilities are described in the [Campaign Wizard help](https://yandex.ru/support/direct/ru/campaign-master/about).
 
-### 1. Подготовить данные и материалы
+### 1. Prepare data and assets
 
-Перед настройкой соберите или подготовьте:
+Before setup, collect or prepare:
 
-| Что понадобится | Что должно быть определено |
+| What you will need | What must be defined |
 |---|---|
-| Кабинет и сайт | Логин, полная ссылка на продвигаемую страницу, название будущей кампании |
-| Предложение | Что продаём, кому, по какой действующей цене, в какие сроки и на какой территории |
-| Результат рекламы | Одна или несколько ценных целей, выбранных пользователем |
-| Обработка обращений | Куда поступает заявка, кто отвечает и когда; для продаж — где подтверждается оплата |
-| Деньги | Допустимый расход за неделю, период запуска, приемлемая цена каждой выбранной цели |
-| Объявления | Готовые заголовки, тексты, изображения или видео, быстрые ссылки и контакты |
+| Account and site | Login, full link to the promoted page, name of the future campaign |
+| Offer | What is sold, to whom, at what current price, within what time frame and in what territory |
+| Ad result | One or more valuable goals chosen by the user |
+| Handling of requests | Where the request arrives, who answers and when; for sales, where payment is confirmed |
+| Money | Acceptable weekly spend, launch period, acceptable cost of each chosen goal |
+| Ads | Ready headlines, texts, images or videos, sitelinks and contacts |
 
-Не останавливайтесь на просьбе «добавьте хорошие объявления». Подготовьте варианты под фактическое предложение. Проверьте названия месяцев, цены, сроки акции и условия на сайте. Для изображений дайте готовые файлы либо точное задание на недостающий материал.
+Do not stop at the request "add good ads". Prepare variants for the actual offer. Check month names, prices, promotion dates and terms against the site. For images, provide ready files or an exact brief for the missing asset.
 
-У каждого текста должны быть понятное предложение и следующий шаг для клиента. Ссылки должны вести к соответствующим товарам, услугам или условиям. Перепроверьте сочетания заголовков, текста и изображений: каждое должно сохранять смысл и действующую цену. [Рекомендации Яндекса по заголовкам и текстам](https://yandex.ru/support/direct/ru/efficiency/text-and-title).
+Every text must have a clear offer and a next step for the customer. Links must lead to the matching products, services or terms. Double-check combinations of headlines, text and images: each must keep its meaning and the current price. [Yandex recommendations on headlines and texts](https://yandex.ru/support/direct/ru/efficiency/text-and-title).
 
-### 2. Подготовить счётчик и доступ
+### 2. Prepare the counter and access
 
-Откройте нужный счётчик в Метрике и проверьте домен. Если счётчика ещё нет, нажмите **Добавить счётчик**, заполните сведения о сайте и установите полученный код на его страницы. В разделе **Настройка → Счётчик → Скопировать** доступен код для установки; владельцу сайта или разработчику передайте конкретный домен и номер счётчика. [Создание и установка счётчика](https://yandex.ru/support/metrica/ru/quick-start).
+Open the needed counter in Metrica and check the domain. If there is no counter yet, click **Add counter (Добавить счётчик)**, fill in the site details and install the resulting code on the site's pages. The installation code is available under **Settings (Настройка) → Counter (Счётчик) → Copy (Скопировать)**; give the site owner or developer the specific domain and counter number. [Creating and installing a counter](https://yandex.ru/support/metrica/ru/quick-start).
 
-Если Метрика и Директ используют разные логины, владелец счётчика открывает **Настройки → Доступ → Индивидуальный доступ → Добавить пользователя**, вводит нужный логин, выбирает соответствующие задаче права и сохраняет изменения. Для просмотра достаточно просмотра; для изменения существующей цели нужны права редактирования. Пароль или токен передавать человеку либо агенту для этого не требуется. [Доступ к счётчику](https://yandex.ru/support/metrica/ru/general/access).
+If Metrica and Direct use different logins, the counter owner opens **Settings (Настройки) → Access (Доступ) → Individual access (Индивидуальный доступ) → Add user (Добавить пользователя)**, enters the needed login, selects the permissions that match the task and saves the changes. View permission is enough for viewing; editing an existing goal requires edit permission. There is no need to give a password or token to a person or an agent for this. [Counter access](https://yandex.ru/support/metrica/ru/general/access).
 
-Результат шага: известны номер счётчика, сайт и логин, который видит его в Директе.
+Result of the step: the counter number, the site, and the login that sees the counter in Direct are known.
 
-### 3. Создать или проверить ценные цели
+### 3. Create or check the valuable goals
 
-Покажите пользователю имеющиеся цели с названиями и ID. Выясните, какой факт означает результат бизнеса. Существующую работающую цель используйте повторно.
+Show the user the existing goals with names and IDs. Find out which fact means a business result. Reuse an existing working goal.
 
-| Результат | Когда считать цель достигнутой | Что недостаточно само по себе |
+| Result | When to count the goal as reached | What is not enough on its own |
 |---|---|---|
-| Принятая заявка | Сервер принял форму и создал обращение в системе обработки заявок | Клик по кнопке, незаполненная форма, сообщение об ошибке |
-| Подтверждённая оплата | Заказ получил подтверждённый статус оплаты | Добавление в корзину, переход к оплате, возврат из платёжной системы без проверки статуса |
-| Качественный звонок | Система учёта звонков подтвердила согласованные признаки целевого звонка | Нажатие на номер телефона |
+| Accepted request | The server accepted the form and created a record in the request handling system | A button click, an unfilled form, an error message |
+| Confirmed payment | The order received a confirmed payment status | Adding to the cart, going to payment, returning from the payment system without a status check |
+| Qualified call | The call tracking system confirmed the agreed signs of a target call | Tapping the phone number |
 
-Если нужна новая цель, в Метрике откройте **Цели → Добавить цель → Целевое событие**. Задайте понятное название и идентификатор события, например `lead_accepted` для принятой заявки. Выберите точное совпадение идентификатора и сохраните цель. Сайт передаёт событие через `reachGoal`; для событий вне сайта используется передача офлайн-данных. [Настройка целевого события](https://yandex.ru/support/metrica/ru/general/goal-js-event).
+If a new goal is needed, in Metrica open **Goals (Цели) → Add goal (Добавить цель) → Target event (Целевое событие)**. Set a clear name and an event identifier, for example `lead_accepted` for an accepted request. Choose exact match for the identifier and save the goal. The site sends the event through `reachGoal`; for events outside the site, offline data upload is used. [Setting up a target event](https://yandex.ru/support/metrica/ru/general/goal-js-event).
 
-Передайте разработчику сайта конкретное задание:
+Give the site developer a specific task:
 
-> Для счётчика с указанным номером отправлять `reachGoal` с идентификатором `lead_accepted` после успешного создания заявки. Не отправлять при ошибке проверки полей, отказе сервера или простом клике. Повторная отрисовка сообщения об успехе не должна создавать повторную цель для той же заявки. Для оплаты завести отдельное событие после подтверждения оплаты, если пользователь выбрал именно этот результат.
+> For the counter with the given number, send `reachGoal` with the identifier `lead_accepted` after the request is successfully created. Do not send it on a field validation error, a server rejection or a plain click. Re-rendering the success message must not create a repeat goal for the same request. For payment, create a separate event after payment is confirmed, if the user chose exactly that result.
 
-Названия событий в этом примере — предлагаемые имена для новых целей. У существующей цели сохраняйте её реальное имя события. Числовой ID цели для Директа и текстовый идентификатор события для сайта — разные значения; запишите оба.
+The event names in this example are suggested names for new goals. For an existing goal, keep its real event name. The numeric goal ID for Direct and the text event identifier for the site are different values; record both.
 
-Если подтверждённая оплата известна только системе учёта заказов, настройте передачу оттуда. В Метрике данные из CRM могут создавать отдельные цели, включая оплаченный заказ. Выберите именно нужный статус. [Загрузка данных из CRM](https://yandex.ru/support/metrica/ru/crm/about). Для магазина с электронной коммерцией проверьте, как именно сайт отправляет событие `purchase`: его название само по себе не доказывает, что деньги получены. [Передача электронной коммерции](https://yandex.ru/support/metrica/ru/ecommerce/data).
+If confirmed payment is known only to the order accounting system, set up the transfer from there. In Metrica, data from a CRM can create separate goals, including a paid order. Choose exactly the status you need. [Uploading data from a CRM](https://yandex.ru/support/metrica/ru/crm/about). For a store with e-commerce, check how exactly the site sends the `purchase` event: its name alone does not prove that the money was received. [Sending e-commerce data](https://yandex.ru/support/metrica/ru/ecommerce/data).
 
-### 4. Проверить цель на настоящем сценарии
+### 4. Test the goal on a real scenario
 
-1. Откройте сайт с параметром `_ym_debug=2`: например, `https://example.com/?_ym_debug=2`. Если в адресе уже есть параметры, добавьте `&_ym_debug=2`.
-2. Выполните целевое действие и проверьте в отладчике Метрики нужный счётчик и событие. При включённом исключении собственных визитов используйте приватное окно. [Официальная проверка цели](https://yandex.ru/support/metrica/ru/general/check-goal).
-3. Сопоставьте отправленное событие с реальной заявкой или подтверждённой оплатой. Затем проверьте ошибочный сценарий: неотправленная форма или отменённая оплата не должны давать ту же цель. Это практическая проверка того, что измеряется результат, который выбрал пользователь.
-4. Найдите цель по имени или ID в разделе **Конверсии** Метрики, задайте период проверки и проверьте достижения и целевые визиты. Данные появляются после обработки. [Отчёт «Конверсии»](https://yandex.ru/support/metrica/ru/reports/conversion).
+1. Open the site with the parameter `_ym_debug=2`, for example `https://example.com/?_ym_debug=2`. If the address already has parameters, add `&_ym_debug=2`.
+2. Perform the target action and check the needed counter and event in the Metrica debugger. If exclusion of your own visits is enabled, use a private window. [Official goal check](https://yandex.ru/support/metrica/ru/general/check-goal).
+3. Match the sent event with a real request or a confirmed payment. Then test the error scenario: an unsent form or a canceled payment must not produce the same goal. This is a practical check that the result the user chose is what gets measured.
+4. Find the goal by name or ID in the **Conversions (Конверсии)** section of Metrica, set the check period and look at the goal reaches and goal visits. Data appears after processing. [The "Conversions" report](https://yandex.ru/support/metrica/ru/reports/conversion).
 
-Сохраните название, ID, счётчик, время проверки и её результат. Прямой тестовый визит проверяет работу цели; он не обязан появиться как рекламная конверсия Директа.
+Save the name, ID, counter, time of the check and its result. A direct test visit verifies that the goal works; it does not have to show up as a Direct ad conversion.
 
-### 5. Собрать кампанию
+### 5. Build the campaign
 
-В Директе откройте **Добавить → Кампанию → Мастер кампаний → Конверсии и трафик** и укажите подготовленную ссылку. Заполните объявления, **Быстрые ссылки**, регион и время показов. В **Аудитория** выберите подходящий режим: **Подобрать оптимальную** или **Настроить вручную**. [Создание кампании](https://yandex.ru/support/direct/ru/campaign-master/site).
+In Direct, open **Add (Добавить) → Campaign (Кампанию) → Campaign Wizard (Мастер кампаний) → Conversions and traffic (Конверсии и трафик)** and enter the prepared link. Fill in the ads, **Sitelinks (Быстрые ссылки)**, region and ad schedule. In **Audience (Аудитория)** choose the suitable mode: **Select optimal (Подобрать оптимальную)** or **Configure manually (Настроить вручную)**. [Creating a campaign](https://yandex.ru/support/direct/ru/campaign-master/site).
 
-Проверьте всё, что Директ предложил автоматически, по подготовленным материалам. Регион должен соответствовать территории обслуживания, а расписание — возможности принимать обращения. Автоматическое расширение и рекомендации оценивайте по задаче бизнеса.
+Check everything Direct suggested automatically against the prepared assets. The region must match the service territory, and the schedule must match the ability to take requests. Evaluate automatic expansion and recommendations against the business goal.
 
-Мастер выбирает места показов автоматически. Если нужны выбор размещений или исключение площадок, подберите другой инструмент до запуска. [Возможности размещения](https://yandex.ru/support/direct/ru/campaign-master/site).
+The Wizard selects ad placements automatically. If you need to choose placements or exclude sites, pick a different tool before launch. [Placement options](https://yandex.ru/support/direct/ru/campaign-master/site).
 
-### 6. Выбрать цели, стратегию и бюджет
+### 6. Choose goals, strategy and budget
 
-В **Цель продвижения** выберите **Максимум целевых действий**. Добавьте счётчик, выбранные **Целевые действия** и их цены. Проверьте автоматически добавленные цели Карт, если подключена организация. [Цели кампании](https://yandex.ru/support/direct/ru/campaign-master/site).
+In **Promotion goal (Цель продвижения)** choose **Maximum target actions (Максимум целевых действий)**. Add the counter, the chosen **Target actions (Целевые действия)** and their prices. Check the Maps goals added automatically, if an organization is connected. [Campaign goals](https://yandex.ru/support/direct/ru/campaign-master/site).
 
-Цена цели означает, сколько готовы платить за результат. Доход от заказа — другая величина. Не подставляйте его в поле цены привлечения. Если допустимая цена ещё не определена, подготовьте расчёт из фактической цены результата в истории и экономики продажи, затем получите недостающее значение у пользователя. Укажите исходные данные и допущения; средний чек сам по себе не определяет допустимый рекламный расход.
+The goal price means how much you are ready to pay for a result. Revenue from an order is a different quantity. Do not put it in the acquisition price field. If the acceptable price is not yet defined, prepare a calculation from the actual cost of a result in the history and the economics of the sale, then get the missing value from the user. State the inputs and assumptions; the average order value alone does not determine acceptable ad spend.
 
-| Вариант цены в Мастере | Как оплачивается реклама |
+| Price option in the Wizard | How the ads are paid |
 |---|---|
-| Средняя цена за неделю | Оплата за клики; алгоритм стремится к заданной средней цене результата |
-| Фиксированная цена | Оплата за конверсии; при нескольких достигнутых выбранных целях оплачивается каждая |
+| Average price per week | Payment per click; the algorithm aims for the set average cost of a result |
+| Fixed price | Payment per conversion; if several chosen goals are reached, each one is paid |
 
-Сопоставьте режим оплаты с выбранными событиями. Если заявка и оплата могут произойти в одном визите, заранее объясните последствия выбора обеих целей. [Режимы оплаты Мастера](https://yandex.ru/support/direct/ru/campaign-master/site).
+Match the payment mode to the chosen events. If a request and a payment can happen in the same visit, explain in advance the consequences of choosing both goals. [Wizard payment modes](https://yandex.ru/support/direct/ru/campaign-master/site).
 
-Задайте согласованный **Недельный бюджет**. Для ограниченного периода отдельно определите дату проверки и остановки: недельная сумма не задаёт общий расход за всё время. Зафиксируйте валюту, учёт НДС и сумму пополнения по интерфейсу кабинета. Минимум и ограничения выбранного режима берите из текущей формы, а не из произвольного примера.
+Set the agreed **Weekly budget (Недельный бюджет)**. For a limited period, define the check and stop date separately: the weekly amount does not set the total spend over the whole time. Record the currency, VAT treatment and top-up amount according to the account interface. Take the minimum and the limits of the selected mode from the current form, not from an arbitrary example.
 
-Если рассматривается **Адаптация бюджета**, отдельно укажите допустимое увеличение и верхнюю границу расходов. Эта настройка может увеличить бюджет следующей недели, поэтому её нельзя включать молча при фиксированном бюджете пользователя. [Адаптация бюджета](https://yandex.ru/support/direct/ru/strategies/budget-adaptation).
+If **Budget adaptation (Адаптация бюджета)** is being considered, state separately the acceptable increase and the upper spending limit. This setting can raise next week's budget, so it must not be turned on silently when the user has a fixed budget. [Budget adaptation](https://yandex.ru/support/direct/ru/strategies/budget-adaptation).
 
-Слишком низкая целевая цена способна ограничить число результатов. Для первого вывода о работе автоматической стратегии Яндекс рекомендует 7–14 дней; отслеживание технических ошибок начинают сразу. [Как работает «Максимум конверсий»](https://yandex.ru/support/direct/ru/strategies/average-cpa).
+A target price that is too low can limit the number of results. For a first conclusion about how an automatic strategy works, Yandex recommends 7-14 days; tracking of technical errors starts immediately. [How "Maximum conversions" works](https://yandex.ru/support/direct/ru/strategies/average-cpa).
 
-### 7. Показать итоговые настройки и отправить кампанию
+### 7. Show the final settings and submit the campaign
 
-Перед завершающим действием заполните таблицу фактическими данными. Она должна быть понятна человеку без чтения кода.
+Before the final action, fill in the table with actual data. It must be understandable to a person without reading code.
 
-| Настройка | Было | Будет |
+| Setting | Was | Will be |
 |---|---|---|
-| Кабинет, кампания | Реальные данные или «новая кампания» | Название, тип, кабинет |
-| Страница перехода | Текущий адрес или «не задан» | Полный проверенный адрес |
-| Объявления | Текущие варианты или «не созданы» | Готовые тексты и файлы; отдельно изменённые месяцы, цены и сроки |
-| Аудитория | Текущие настройки или «не заданы» | Территория, расписание, режим подбора аудитории |
-| Счётчик и цели | Текущий выбор или «не заданы» | Номер счётчика; название и ID каждой выбранной цели |
-| Цена и оплата | Текущие значения или «не заданы» | Цена каждой цели, валюта, выбранный режим оплаты |
-| Бюджет | Текущий бюджет или «не задан» | Сумма за неделю; адаптация; согласованный предел расходов |
-| Период | Текущие даты или «не заданы» | Начало, дата проверки, условие остановки |
-| Проверка | Что уже проверено | Кто сверяет запуск, цели и первые результаты |
+| Account, campaign | Real data or "new campaign" | Name, type, account |
+| Landing page | Current address or "not set" | Full verified address |
+| Ads | Current variants or "not created" | Ready texts and files; changed months, prices and dates listed separately |
+| Audience | Current settings or "not set" | Territory, schedule, audience selection mode |
+| Counter and goals | Current choice or "not set" | Counter number; name and ID of each chosen goal |
+| Price and payment | Current values or "not set" | Price of each goal, currency, chosen payment mode |
+| Budget | Current budget or "not set" | Weekly amount; adaptation; agreed spending limit |
+| Period | Current dates or "not set" | Start, check date, stop condition |
+| Verification | What has already been checked | Who verifies the launch, the goals and the first results |
 
-**Создать кампанию** отправляет её на модерацию; **Сохранить как черновик** сохраняет подготовку. Показы могут начаться после одобрения при наличии денег. [Модерация и запуск](https://yandex.ru/support/direct/ru/campaign-master/site). Если требуется пополнение, пользователь выбирает подходящий ему способ и проверяет сумму в кабинете. [Способы оплаты](https://yandex.ru/support/direct/ru/payments/payment-methods).
+**Create campaign (Создать кампанию)** sends it to moderation; **Save as draft (Сохранить как черновик)** saves the preparation. Ads may start showing after approval if there is money in the account. [Moderation and launch](https://yandex.ru/support/direct/ru/campaign-master/site). If a top-up is required, the user chooses the method that suits them and checks the amount in the account. [Payment methods](https://yandex.ru/support/direct/ru/payments/payment-methods).
 
-После отправки зафиксируйте ID и фактический статус кампании. При отклонении прочитайте причину конкретного элемента, подготовьте исправление и покажите его до/после. После сохранения сверьте настройки с таблицей.
+After submitting, record the campaign ID and its actual status. If it is rejected, read the reason for the specific element, prepare the fix and show it as before/after. After saving, check the settings against the table.
 
-### 8. Проверить рекламу после запуска
+### 8. Check the ads after launch
 
-Откройте **Статистика** под названием кампании либо **Статистика → Мастер отчётов**. Задайте фактические даты работы и те же ценные цели. [Мастер отчётов Директа](https://yandex.ru/support/direct/ru/statistics/new-reports-wizard).
+Open **Statistics (Статистика)** under the campaign name, or **Statistics (Статистика) → Report Wizard (Мастер отчётов)**. Set the actual dates of operation and the same valuable goals. [Direct Report Wizard](https://yandex.ru/support/direct/ru/statistics/new-reports-wizard).
 
-Проверьте расход, показы, клики и конверсии отдельно по каждой выбранной цели. Через скилл можно получить отчёт по ID кампании:
+Check spend, impressions, clicks and conversions separately for each chosen goal. Through the skill you can get a report by campaign ID:
 
 ```sh
 uv run scripts/report.py --account client-login --campaign 123456 \
@@ -135,8 +135,8 @@ uv run scripts/report.py --account client-login --campaign 123456 \
   --attribution AUTO --no-cache
 ```
 
-В примере логин, кампания и цели условные; замените их фактическими значениями. Атрибуцию и НДС приведите к тем же настройкам, что используете в интерфейсе. Формулы и особенности сравнения приведены в [REPORTS.md](REPORTS.md).
+In the example the login, campaign and goals are placeholders; replace them with actual values. Bring attribution and VAT in line with the settings you use in the interface. Formulas and comparison details are in [REPORTS.md](REPORTS.md).
 
-Сверьте конверсии с принятыми заявками или оплаченными заказами за сопоставимый период. Учитывайте задержку обработки и время от рекламного перехода до результата. При отсутствии конверсий сначала проверьте, работает ли событие, выбран ли нужный ID и успели ли накопиться данные; только затем обсуждайте изменения рекламы.
+Compare conversions with accepted requests or paid orders for a comparable period. Account for processing delay and the time from the ad click to the result. If there are no conversions, first check whether the event works, whether the right ID is selected and whether data has had time to accumulate; only then discuss changes to the ads.
 
-Передайте пользователю конкретный результат: кампания создана или подготовлена; её ID и статус; выбранные цели; фактические бюджет и режим оплаты; что проверено; какое действие ещё требуется и по каким данным будет оцениваться результат.
+Give the user a concrete outcome: the campaign is created or prepared; its ID and status; the chosen goals; the actual budget and payment mode; what was checked; what action is still required and what data the result will be judged on.

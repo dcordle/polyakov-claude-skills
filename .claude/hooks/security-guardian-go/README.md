@@ -4,28 +4,28 @@ High-performance security hooks for Claude Code, written in Go for maximum speed
 
 ---
 
-## Быстрый старт (Quick Start)
+## Quick Start
 
-### Шаг 1: Скопировать в свой проект
+### Step 1: Copy into your project
 
 ```bash
-# Создать структуру директорий
+# Create the directory structure
 mkdir -p /path/to/your/project/.claude/hooks
 
-# Скопировать security-guardian-go
+# Copy security-guardian-go
 cp -r .claude/hooks/security-guardian-go /path/to/your/project/.claude/hooks/
 ```
 
-### Шаг 2: Собрать бинарник
+### Step 2: Build the binary
 
 ```bash
 cd /path/to/your/project/.claude/hooks/security-guardian-go
 go build -o bin/guardian ./cmd/guardian
 ```
 
-### Шаг 3: Создать settings.json
+### Step 3: Create settings.json
 
-Создать файл `/path/to/your/project/.claude/settings.json`:
+Create the file `/path/to/your/project/.claude/settings.json`:
 
 ```json
 {
@@ -42,16 +42,16 @@ go build -o bin/guardian ./cmd/guardian
 }
 ```
 
-### Шаг 4: Добавить в .gitignore проекта
+### Step 4: Add to the project's .gitignore
 
 ```gitignore
 # Security Guardian binary (build locally)
 .claude/hooks/security-guardian-go/bin/
 ```
 
-### Готово!
+### Done!
 
-Теперь при запуске Claude Code в этом проекте все опасные команды будут проверяться guardian'ом.
+From now on, whenever Claude Code runs in this project, every dangerous command is checked by the guardian.
 
 ---
 

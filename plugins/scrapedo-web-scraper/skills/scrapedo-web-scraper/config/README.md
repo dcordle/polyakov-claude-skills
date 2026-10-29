@@ -1,24 +1,24 @@
-# Настройка токена Scrape.do
+# Setting up the Scrape.do token
 
-## Где получить токен
+## Where to get a token
 
-1. Зарегистрируйся на https://scrape.do
-2. В личном кабинете скопируй API токен
+1. Sign up at https://scrape.do
+2. In your account dashboard, copy the API token
 
-## Куда положить
+## Where to put it
 
-Создай файл `token.txt` в этой директории:
-
-```bash
-echo 'твой_токен' > token.txt
-```
-
-Или установи переменную окружения:
+Create a `token.txt` file in this directory:
 
 ```bash
-export SCRAPEDO_TOKEN='твой_токен'
+echo 'your_token' > token.txt
 ```
 
-## Безопасность
+Or set an environment variable:
 
-Файл `token.txt` добавлен в `.gitignore` — не попадет в git.
+```bash
+export SCRAPEDO_TOKEN='your_token'
+```
+
+## Security
+
+The `token.txt` file is listed in `.gitignore`, so it will not end up in git.

@@ -1,12 +1,12 @@
-# Правила проекта polyakov-claude-skills
+# Rules for the polyakov-claude-skills project
 
-## plugin.json — формат манифеста
+## plugin.json: manifest format
 
-При создании/редактировании `.claude-plugin/plugin.json`:
+When creating or editing `.claude-plugin/plugin.json`:
 
-- **`author`** — ОБЯЗАТЕЛЬНО объект: `{"name": "Polyakov"}`. Строка вызывает ошибку валидации.
-- **`skills`** — НЕ валидное поле. Не добавлять. Скиллы обнаруживаются автоматически из `skills/` директории.
-- Эталонный формат:
+- **`author`**: MUST be an object: `{"name": "Polyakov"}`. A string causes a validation error.
+- **`skills`**: NOT a valid field. Do not add it. Skills are discovered automatically from the `skills/` directory.
+- Reference format:
   ```json
   {
     "name": "plugin-name",
@@ -20,64 +20,64 @@
 
 ## marketplace.json
 
-- При добавлении нового плагина — обязательно добавить запись в `.claude-plugin/marketplace.json` → `plugins[]`, иначе плагин не будет виден через `/plugin install`.
+- When adding a new plugin, you must add an entry to `.claude-plugin/marketplace.json` → `plugins[]`, otherwise the plugin will not be visible through `/plugin install`.
 
-## Структура файлов скилла
+## Skill file structure
 
-Каждый скилл должен следовать официальной файловой структуре:
+Every skill must follow the official file structure:
 
 ```
 your-skill-name/
-├── SKILL.md           # Required — главный файл скилла
-├── scripts/           # Optional — исполняемый код
-├── references/        # Optional — доп. документация
-└── assets/            # Optional — шаблоны и пр.
+├── SKILL.md           # Required: the main skill file
+├── scripts/           # Optional: executable code
+├── references/        # Optional: extra documentation
+└── assets/            # Optional: templates, etc.
 ```
 
-- **Дополнительная документация** (подробные гайды, справочники) — ТОЛЬКО в `references/`, НЕ в корне скилла рядом с SKILL.md.
-- В SKILL.md ссылки на доп. документы: `[doc.md](references/doc.md)`.
-- SKILL.md должен содержать только основные инструкции (progressive disclosure).
+- **Extra documentation** (detailed guides, references) goes ONLY in `references/`, NOT in the skill root next to SKILL.md.
+- In SKILL.md, link to extra documents like this: `[doc.md](references/doc.md)`.
+- SKILL.md should contain only the core instructions (progressive disclosure).
 
-## Shell-скрипты для облачной песочницы Claude
+## Shell scripts for the Claude cloud sandbox
 
-Скрипты скиллов исполняются в облачной песочнице Claude (cloud sandbox). Она имеет ограничения, которые ломают стандартные bash-подходы. Ниже — правила, выведенные из практики.
+Skill scripts run in the Claude cloud sandbox. It has restrictions that break standard bash approaches. The rules below come from practice.
 
-### Шелл и совместимость
+### Shell and compatibility
 
-- Шебанг: `#!/bin/sh`, не `#!/bin/bash`. В песочнице bash может отсутствовать.
-- Никаких башизмов: `[[ ]]` → `[ ]`, `${BASH_SOURCE[0]}` → `$0`, `source` → `.`, `local` → переменные с префиксом `_funcname_`.
-- Никаких внешних `source common.sh` — всё инлайнить в скрипт. Песочница может не разрешить чтение соседних файлов.
-- Эталон: `plugins/fal-ai-image/skills/fal-ai-image/scripts/` (commit `6410d65`).
+- Shebang: `#!/bin/sh`, not `#!/bin/bash`. Bash may be missing in the sandbox.
+- No bashisms: `[[ ]]` → `[ ]`, `${BASH_SOURCE[0]}` → `$0`, `source` → `.`, `local` → variables prefixed with `_funcname_`.
+- No external `source common.sh`: inline everything into the script. The sandbox may not allow reading neighboring files.
+- Reference: `plugins/fal-ai-image/skills/fal-ai-image/scripts/` (commit `6410d65`).
 
-### Stdout буфер — главная ловушка
+### The stdout buffer is the main trap
 
-- Песочница имеет ограничение на размер stdout (~4–64 KB, точное значение — issue #48).
-- Если скрипт выводит больше лимита — **молчаливый отказ**: "Error running command", без вывода и без stderr.
-- Симптом: маленькие скрипты (quota.sh, ~200 байт вывода) работают, большие (top_requests.sh с JSON ~50 KB) — нет.
+- The sandbox limits stdout size (~4-64 KB, the exact value is in issue #48).
+- If a script prints more than the limit, it fails **silently**: "Error running command", with no output and no stderr.
+- Symptom: small scripts (quota.sh, ~200 bytes of output) work, big ones (top_requests.sh with ~50 KB of JSON) do not.
 
-### Решение: temp file вместо переменной
+### Solution: a temp file instead of a variable
 
 ```sh
-# ПЛОХО — ответ API в переменной, echo | grep ломается на большом JSON
+# BAD: API response in a variable, echo | grep breaks on large JSON
 result=$(curl -s ...)
 echo "$result" | grep ...
 
-# ХОРОШО — ответ в файл, grep читает файл напрямую
+# GOOD: response in a file, grep reads the file directly
 TMPFILE="${TMPDIR:-/tmp}/result_$$.json"
 trap 'rm -f "$TMPFILE"' EXIT
 curl -s ... | tr -d '\n\r' > "$TMPFILE"
 grep ... "$TMPFILE"
 ```
 
-- `tr -d '\n\r'` нормализует JSON в одну строку для безопасного парсинга через grep/sed.
-- `trap cleanup EXIT` гарантирует удаление файла.
-- Переменная `$$` (PID) делает имя файла уникальным.
+- `tr -d '\n\r'` normalizes the JSON into one line for safe parsing with grep/sed.
+- `trap cleanup EXIT` guarantees the file is removed.
+- The `$$` variable (PID) makes the file name unique.
 
-### Чеклист при создании нового скрипта
+### Checklist for creating a new script
 
 1. `#!/bin/sh` + `set -e`
-2. Инлайн конфиг: `[ -f "$CONFIG" ] && . "$CONFIG"`
-3. API-ответ → temp file, не переменная
-4. Всё чтение данных — grep/sed по файлу, не `echo "$var" | ...`
-5. Минимум stdout: таблицы ≤20 строк, остальное в CSV/файл
-6. Никаких `local`, `[[ ]]`, `source`, массивов bash
+2. Inline config: `[ -f "$CONFIG" ] && . "$CONFIG"`
+3. API response → temp file, not a variable
+4. All data reading is grep/sed on a file, not `echo "$var" | ...`
+5. Minimal stdout: tables of ≤20 lines, the rest goes to CSV/a file
+6. No `local`, `[[ ]]`, `source`, or bash arrays

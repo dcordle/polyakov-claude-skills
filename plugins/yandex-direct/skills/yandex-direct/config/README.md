@@ -1,45 +1,45 @@
-# Подключение к Яндекс Директу
+# Connecting to Yandex Direct
 
-Команды сами читают `config/.env`. Не выводите этот файл, токен или заголовок
-Authorization в диалог, журнал отладки либо командную строку.
+The commands read `config/.env` themselves. Do not print this file, the token or the
+Authorization header into the chat, the debug log or the command line.
 
-Если `.env` уже настроен, используйте его. Для нового подключения скопируйте
-`.env.example` в `.env` и заполните его в редакторе:
+If `.env` is already set up, use it. For a new connection, copy
+`.env.example` to `.env` and fill it in with an editor:
 
-- `YANDEX_DIRECT_TOKEN` — OAuth-токен пользователя с доступом к API Директа.
-- `YANDEX_DIRECT_ACCOUNT` — логин рекламного кабинета по умолчанию;
-  ниже показано, где его взять и как выбрать другой кабинет.
-- `YANDEX_DIRECT_LOCALE` — язык сообщений API: `ru`, `en` или `tr`.
-- `YANDEX_DIRECT_USE_OPERATOR_UNITS` — чьи баллы расходовать: `auto`, `never`
-  (клиента) или `always` (агентства). Обычно достаточно `auto`.
+- `YANDEX_DIRECT_TOKEN` - the OAuth token of a user with access to the Direct API.
+- `YANDEX_DIRECT_ACCOUNT` - the login of the default ad account;
+  below you can see where to get it and how to pick another account.
+- `YANDEX_DIRECT_LOCALE` - the language of API messages: `ru`, `en` or `tr`.
+- `YANDEX_DIRECT_USE_OPERATOR_UNITS` - whose points to spend: `auto`, `never`
+  (the client's) or `always` (the agency's). `auto` is usually enough.
 
-В `ACCOUNT` нужен логин клиента, которому принадлежит реклама. Его можно
-посмотреть в выводе `accounts.py` или взять из параметра `ulogin` в адресе
-открытого кабинета. Например, для
-`https://direct.yandex.ru/dna/grid/campaigns?ulogin=client-shop` настройка такая:
+`ACCOUNT` needs the login of the client who owns the ads. You can find it
+in the output of `accounts.py` or take it from the `ulogin` parameter in the URL of
+the open account. For example, for
+`https://direct.yandex.ru/dna/grid/campaigns?ulogin=client-shop` the setting is:
 
 ```dotenv
 YANDEX_DIRECT_ACCOUNT=client-shop
 ```
 
-Здесь `client-shop` — пример: замените его своим логином. Название компании,
-ID кампании и логин агентства вместо логина клиента не подходят. Эта настройка
-выбирает кабинет среди уже доступных токену; доступ к чужому кабинету она не даёт.
+Here `client-shop` is an example: replace it with your own login. A company name,
+a campaign ID or an agency login instead of the client login will not work. This setting
+picks an account among those the token can already reach; it does not grant access to someone else's account.
 
-Команды работы с рекламой выбирают кабинет в таком порядке:
+Advertising commands choose the account in this order:
 
-1. Явный `--account` в текущей команде.
-2. Сохранённый выбор `accounts.py --use`.
-3. Единственный неархивный кабинет, если выбирать не из чего.
-4. `YANDEX_DIRECT_ACCOUNT` из настроек.
+1. An explicit `--account` in the current command.
+2. The saved choice from `accounts.py --use`.
+3. The only non-archived account, if there is nothing to choose from.
+4. `YANDEX_DIRECT_ACCOUNT` from the settings.
 
-Переменные окружения имеют приоритет над значениями в `.env`. Поле `ACCOUNT`
-можно оставить пустым: свой единственный кабинет определится автоматически,
-а при нескольких кабинетах используйте `--account` или `--use`.
+Environment variables take priority over values in `.env`. The `ACCOUNT` field
+can be left empty: your only account will be detected automatically,
+and with several accounts use `--account` or `--use`.
 
-Например, при нескольких доступных кабинетах и без сохранённого выбора первая
-команда ниже прочитает кампании `client-shop` из настройки, вторая — другого
-клиента только для этого запуска, третья запомнит его для последующих команд:
+For example, with several accounts available and no saved choice, the first
+command below reads the campaigns of `client-shop` from the settings, the second reads those of another
+client for this run only, and the third remembers that client for later commands:
 
 ```bash
 uv run scripts/campaigns.py
@@ -47,31 +47,31 @@ uv run scripts/campaigns.py --account client-service
 uv run scripts/accounts.py --use client-service
 ```
 
-После третьей команды `campaigns.py` без `--account` выберет `client-service`,
-даже если в `.env` остаётся `client-shop`. Для параллельной работы указывайте
-`--account` явно, чтобы команды не зависели от общего сохранённого выбора.
+After the third command, `campaigns.py` without `--account` will pick `client-service`,
+even if `.env` still says `client-shop`. For parallel work, pass
+`--account` explicitly so the commands do not depend on the shared saved choice.
 
-Проверка подключения из каталога скилла:
+Checking the connection from the skill directory:
 
 ```bash
 uv run scripts/whoami.py
 uv run scripts/accounts.py
 ```
 
-`whoami.py` проверяет подключение по `--account` или `ACCOUNT` из настроек и
-не использует сохранённый выбор `--use`. Без этих значений он проверяет свой
-кабинет рекламодателя либо агентский доступ без выбора отдельного клиента.
+`whoami.py` checks the connection using `--account` or `ACCOUNT` from the settings and
+does not use the saved `--use` choice. Without these values it checks your own
+advertiser account or agency access without picking a separate client.
 
-Если доступа ещё нет, откройте [API_ACCESS.md](API_ACCESS.md): там страницы
-регистрации приложения и подачи заявки, примеры заполнения и получение токена.
+If you have no access yet, open [API_ACCESS.md](API_ACCESS.md): it has the pages
+for registering the application and submitting the request, filling-in examples and how to get a token.
 
-Дополнительный профиль `--env test_cabinet` использует
-`YANDEX_DIRECT_ACCOUNT_TEST_CABINET` и, если задан,
-`YANDEX_DIRECT_TOKEN_TEST_CABINET`. Без отдельного токена используется основной.
-Это обычный кабинет с реальной рекламой, а не песочница.
-Основной `YANDEX_DIRECT_ACCOUNT` этот профиль не наследует. Выбор через
-`accounts.py --use` сохраняется отдельно для каждого профиля.
+The extra profile `--env test_cabinet` uses
+`YANDEX_DIRECT_ACCOUNT_TEST_CABINET` and, if set,
+`YANDEX_DIRECT_TOKEN_TEST_CABINET`. Without a separate token the main one is used.
+This is a regular account with real ads, not a sandbox.
+This profile does not inherit the main `YANDEX_DIRECT_ACCOUNT`. The choice made with
+`accounts.py --use` is saved separately for each profile.
 
-Из `config/` в Git входят только инструкции `README.md`, `API_ACCESS.md` и
-пустой образец `.env.example`. Токены, выбранные кабинеты, кеш и журналы
-остаются локально.
+Of `config/`, only the instructions `README.md`, `API_ACCESS.md` and
+the empty sample `.env.example` go into Git. Tokens, selected accounts, cache and logs
+stay local.

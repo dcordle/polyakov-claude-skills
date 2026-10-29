@@ -1,6 +1,6 @@
 {
   "name": "docx-contracts",
-  "description": "Заполнение Word шаблонов (договоры, формы) по данным из контекста",
+  "description": "Filling Word templates (contracts, forms) from data in the context",
   "version": "1.0.0",
   "author": {
     "name": "Polyakov"

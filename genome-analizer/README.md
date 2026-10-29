@@ -1,15 +1,15 @@
 # genome-analizer
 
-> Этот скилл переехал в новую структуру плагинов.
+> This skill has moved to the new plugin structure.
 
-**Новое расположение:** [plugins/genome-analizer/skills/genome-analizer](../plugins/genome-analizer/skills/genome-analizer)
+**New location:** [plugins/genome-analizer/skills/genome-analizer](../plugins/genome-analizer/skills/genome-analizer)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально (для всех проектов)
+# Globally (for all projects)
 cp -r ../plugins/genome-analizer/skills/genome-analizer ~/.claude/skills/
 
-# Или для конкретного проекта
+# Or for a specific project
 cp -r ../plugins/genome-analizer/skills/genome-analizer .claude/skills/
 ```

@@ -2,44 +2,44 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "polyakov-claude-skills",
   "version": "1.0.0",
-  "description": "Набор скиллов для Claude: работа с .docx, веб-скрапинг, управление агентами",
+  "description": "A set of skills for Claude: working with .docx, web scraping, agent management",
   "owner": {
     "name": "Polyakov"
   },
   "plugins": [
     {
       "name": "blogger-ads-skill",
-      "description": "Рекламные размещения: договор и приложения, счета, УПД, маркировка и напоминания",
+      "description": "Advertising placements: contract and appendices, invoices, UPD, labeling and reminders",
       "source": "./plugins/blogger-ads-skill",
       "category": "productivity"
     },
     {
       "name": "docx-contracts",
-      "description": "Заполнение Word шаблонов (договоры, формы) по данным из контекста",
+      "description": "Filling Word templates (contracts, forms) from data in the context",
       "source": "./plugins/docx-contracts",
       "category": "productivity"
     },
     {
       "name": "scrapedo-web-scraper",
-      "description": "Веб-скрапинг через Scrape.do с обходом защит и JavaScript рендерингом",
+      "description": "Web scraping through Scrape.do with bot-protection bypass and JavaScript rendering",
       "source": "./plugins/scrapedo-web-scraper",
       "category": "productivity"
     },
     {
       "name": "agent-deck",
-      "description": "Управление AI агентами через agent-deck CLI",
+      "description": "Managing AI agents through the agent-deck CLI",
       "source": "./plugins/agent-deck",
       "category": "development"
     },
     {
       "name": "genome-analizer",
-      "description": "Анализ генетических данных из VCF файла",
+      "description": "Analysis of genetic data from a VCF file",
       "source": "./plugins/genome-analizer",
       "category": "productivity"
     },
     {
       "name": "ssh-remote-connection",
-      "description": "SSH подключение к удалённым серверам с agent forwarding",
+      "description": "SSH connection to remote servers with agent forwarding",
       "source": "./plugins/ssh-remote-connection",
       "category": "development"
     },
@@ -57,25 +57,25 @@
     },
     {
       "name": "yandex-wordstat",
-      "description": "Анализ поискового спроса через Yandex Wordstat API",
+      "description": "Search demand analysis through the Yandex Wordstat API",
       "source": "./plugins/yandex-wordstat",
       "category": "productivity"
     },
     {
       "name": "yandex-search-api",
-      "description": "Поиск в Яндексе через Search API v2: содержательные выдержки страниц (smart snippets) + парсинг выдачи (sync + async)",
+      "description": "Yandex search through Search API v2: meaningful page extracts (smart snippets) + results parsing (sync + async)",
       "source": "./plugins/yandex-search-api",
       "category": "productivity"
     },
     {
       "name": "yandex-metrika",
-      "description": "Яндекс Метрика: отчёты, API-сегменты и управление доступом рекламных кабинетов",
+      "description": "Yandex Metrica: reports, API segments and access management for ad accounts",
       "source": "./plugins/yandex-metrika",
       "category": "productivity"
     },
     {
       "name": "yandex-direct",
-      "description": "Яндекс Директ: статистика по ценным целям, позиции в поиске и управление рекламой с показом до/после",
+      "description": "Yandex Direct: statistics by valuable goals, search positions and ad management with a before/after view",
       "source": "./plugins/yandex-direct",
       "category": "productivity"
     },
@@ -87,61 +87,61 @@
     },
     {
       "name": "yandex-webmaster",
-      "description": "Yandex Webmaster API: управление сайтами, индексация, поисковые запросы, переобход",
+      "description": "Yandex Webmaster API: site management, indexing, search queries, recrawl",
       "source": "./plugins/yandex-webmaster",
       "category": "productivity"
     },
     {
       "name": "zoomkit",
-      "description": "ZoomKit: подключение, проекты, кампании, ставки и проверка рекламных ссылок",
+      "description": "ZoomKit: connection, projects, campaigns, bids and ad link checking",
       "source": "./plugins/zoomkit",
       "category": "productivity"
     },
     {
       "name": "crawl4ai-seo",
-      "description": "SEO-краулер сайтов: инвентаризация, on-page аудит, перелинковка, навигационный аудит, анализ конкурентов",
+      "description": "SEO site crawler: inventory, on-page audit, internal linking, navigation audit, competitor analysis",
       "source": "./plugins/crawl4ai-seo",
       "category": "productivity"
     },
     {
       "name": "telegram-channel-parser",
-      "description": "Парсинг публичных Telegram-каналов: посты, метрики, дайджесты, конкурентный анализ через t.me/s/",
+      "description": "Parsing public Telegram channels: posts, metrics, digests, competitor analysis through t.me/s/",
       "source": "./plugins/telegram-channel-parser",
       "category": "productivity"
     },
     {
       "name": "x-research",
-      "description": "X/Twitter research via xAI Grok API: дайджесты, анализ тредов, трендовые темы, поиск",
+      "description": "X/Twitter research via the xAI Grok API: digests, thread analysis, trending topics, search",
       "source": "./plugins/x-research",
       "category": "productivity"
     },
     {
       "name": "github-pages-publisher",
-      "description": "Публикация статических артифактов на GitHub Pages с YYYY/YYYY-MM структурой, viewport-валидацией и опциональной оптимизацией картинок",
+      "description": "Publishing static artifacts to GitHub Pages with a YYYY/YYYY-MM structure, viewport validation and optional image optimization",
       "source": "./plugins/github-pages-publisher",
       "category": "development"
     },
     {
       "name": "sourcecraft-publisher",
-      "description": "Публикация статических артифактов на SourceCraft Sites (Yandex, работает в России) с опциональной оптимизацией картинок",
+      "description": "Publishing static artifacts to SourceCraft Sites (Yandex, works in Russia) with optional image optimization",
       "source": "./plugins/sourcecraft-publisher",
       "category": "development"
     },
     {
       "name": "reddit-skill",
-      "description": "Reddit: чтение без ключей через веб-инструмент агента, JSON и RSS; скрипты с кешем, OAuth2 и защищённая запись",
+      "description": "Reddit: keyless reading through the agent's web tool, JSON and RSS; scripts with a cache, OAuth2 and guarded writes",
       "source": "./plugins/reddit-skill",
       "category": "productivity"
     },
     {
       "name": "knowledge-compiler",
-      "description": "Компилятор прикладных знаний из книг и длинных источников в личные скиллы с картой источников",
+      "description": "Compiler of applied knowledge from books and long sources into personal skills with a source map",
       "source": "./plugins/knowledge-compiler",
       "category": "productivity"
     },
     {
       "name": "perplexity-search",
-      "description": "Perplexity API на shell: сырая выдача, ответ с цитатами, deep research в фоне, чтение страниц; cache-first",
+      "description": "Perplexity API in shell: raw results, answers with citations, background deep research, page reading; cache-first",
       "source": "./plugins/perplexity-search",
       "category": "productivity"
     }

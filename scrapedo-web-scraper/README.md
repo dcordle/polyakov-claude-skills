@@ -1,15 +1,15 @@
 # scrapedo-web-scraper
 
-> Этот скилл переехал в новую структуру плагинов.
+> This skill has moved to the new plugin structure.
 
-**Новое расположение:** [plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper](../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper)
+**New location:** [plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper](../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально (для всех проектов)
+# Globally (for all projects)
 cp -r ../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper ~/.claude/skills/
 
-# Или для конкретного проекта
+# Or for a specific project
 cp -r ../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper .claude/skills/
 ```

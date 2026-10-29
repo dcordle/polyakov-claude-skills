@@ -1,7 +1,7 @@
 {
   "name": "zoomkit",
   "version": "1.0.3",
-  "description": "ZoomKit: подключение, проекты, кампании, ставки и проверка рекламных ссылок.",
+  "description": "ZoomKit: connection, projects, campaigns, bids and ad link checking.",
   "author": {
     "name": "Polyakov"
   }

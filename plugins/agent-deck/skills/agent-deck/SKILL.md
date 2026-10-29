@@ -1,151 +1,151 @@
 ---
 name: agent-deck
 description: |
-  Управление сессиями AI агентов через agent-deck CLI.
-  Триггеры (RU): "запусти агента", "запусти саб-агента", "создай сессию",
-  "проверь сессию", "проверь статус", "покажи вывод агента", "что агент ответил".
+  Manage AI agent sessions through the agent-deck CLI.
+  Triggers (RU): "запусти агента" (launch an agent), "запусти саб-агента" (launch a sub-agent), "создай сессию" (create a session),
+  "проверь сессию" (check the session), "проверь статус" (check the status), "покажи вывод агента" (show agent output), "что агент ответил" (what the agent replied).
   Triggers (EN): "launch sub-agent", "create sub-agent", "start session",
   "check session", "show agent output".
 ---
 
 # Agent Deck CLI
 
-Менеджер терминальных сессий для AI агентов. Позволяет запускать, контролировать и получать результаты от дочерних Claude сессий.
+Terminal session manager for AI agents. Lets you launch child Claude sessions, monitor them, and collect their results.
 
-## Запуск суб-агента
+## Launching a sub-agent
 
-**Триггеры:** "запусти агента", "запусти саб-агента", "launch sub-agent"
+**Triggers:** "запусти агента" (launch an agent), "запусти саб-агента" (launch a sub-agent), "launch sub-agent"
 
-### Простой запуск (CLI команды)
-
-```bash
-# Создать сессию
-agent-deck add -t "Название" -c claude /path/to/workdir
-
-# Создать как дочернюю сессию текущего агента
-agent-deck add -t "Название" --parent "Родитель" -c claude /path/to/workdir
-
-# Запустить
-agent-deck session start "Название"
-
-# Отправить задачу
-agent-deck session send "Название" "Твоя задача..."
-```
-
-### Автоматический запуск (скрипт)
+### Simple launch (CLI commands)
 
 ```bash
-scripts/launch-subagent.sh "Название" "Промпт" [--mcp exa] [--wait]
+# Create a session
+agent-deck add -t "Name" -c claude /path/to/workdir
+
+# Create as a child session of the current agent
+agent-deck add -t "Name" --parent "Parent" -c claude /path/to/workdir
+
+# Start it
+agent-deck session start "Name"
+
+# Send the task
+agent-deck session send "Name" "Your task..."
 ```
 
-Скрипт автоматически:
-- Определяет текущую сессию и профиль
-- Создаёт дочернюю сессию
-- Ждёт инициализации Claude
-- Отправляет промпт
+### Automatic launch (script)
 
-### Режимы получения результата
+```bash
+scripts/launch-subagent.sh "Name" "Prompt" [--mcp exa] [--wait]
+```
 
-| Режим | Команда | Когда использовать |
+The script automatically:
+- Detects the current session and profile
+- Creates a child session
+- Waits for Claude to initialize
+- Sends the prompt
+
+### Ways to get the result
+
+| Mode | Command | When to use |
 |-------|---------|-------------------|
-| **Fire & forget** | (без --wait) | По умолчанию. Скажи: "Спроси меня когда будет готово" |
-| **On-demand** | `agent-deck session output "Название"` | Когда пользователь спрашивает |
-| **Blocking** | `--wait` | Нужен немедленный результат |
+| **Fire & forget** | (without --wait) | Default. Say: "Ask me when it's ready" |
+| **On-demand** | `agent-deck session output "Name"` | When the user asks |
+| **Blocking** | `--wait` | An immediate result is needed |
 
 ---
 
-## Проверка статуса
+## Checking status
 
-**Триггеры:** "проверь сессию", "проверь статус", "check session"
+**Triggers:** "проверь сессию" (check the session), "проверь статус" (check the status), "check session"
 
 ```bash
-agent-deck status                      # Все сессии (сводка)
-agent-deck session show "Название"     # Детали конкретной сессии
-agent-deck session show -json "Название"  # JSON формат
-agent-deck session current             # Текущая сессия (в которой работаем)
-agent-deck session current --json      # Текущая сессия в JSON
+agent-deck status                      # All sessions (summary)
+agent-deck session show "Name"         # Details of a specific session
+agent-deck session show -json "Name"   # JSON format
+agent-deck session current             # Current session (the one we are working in)
+agent-deck session current --json      # Current session as JSON
 ```
 
-**Статусы:**
-- `●` работает (running)
-- `◐` ждёт ввода (waiting)
-- `○` простаивает (idle)
-- `✕` ошибка (error)
+**Statuses:**
+- `●` running
+- `◐` waiting for input (waiting)
+- `○` idle
+- `✕` error
 
 ---
 
-## Получение результата
+## Getting the result
 
-**Триггеры:** "покажи вывод агента", "что агент ответил", "show agent output"
+**Triggers:** "покажи вывод агента" (show agent output), "что агент ответил" (what the agent replied), "show agent output"
 
 ```bash
-agent-deck session output "Название"
+agent-deck session output "Name"
 ```
 
 ---
 
-## MCP подключение
+## Attaching MCP
 
 ```bash
-agent-deck mcp list                        # Доступные MCP серверы
-agent-deck mcp attach "Название" exa       # Подключить MCP к сессии
-agent-deck session restart "Название"      # ОБЯЗАТЕЛЬНО после подключения!
+agent-deck mcp list                        # Available MCP servers
+agent-deck mcp attach "Name" exa           # Attach MCP to a session
+agent-deck session restart "Name"          # REQUIRED after attaching!
 ```
 
-### Рекомендуемые MCP
+### Recommended MCP
 
-| Задача | MCP серверы |
+| Task | MCP servers |
 |--------|-------------|
-| Веб-поиск | `exa`, `firecrawl` |
-| Документация кода | `context7` |
-| Сложные рассуждения | `sequential-thinking` |
+| Web search | `exa`, `firecrawl` |
+| Code documentation | `context7` |
+| Complex reasoning | `sequential-thinking` |
 
 ---
 
-## Управление сессиями
+## Session management
 
 ```bash
-# Жизненный цикл
-agent-deck session start "Название"
-agent-deck session stop "Название"
-agent-deck session restart "Название"
+# Lifecycle
+agent-deck session start "Name"
+agent-deck session stop "Name"
+agent-deck session restart "Name"
 
-# Список всех сессий
+# List all sessions
 agent-deck ls
 agent-deck ls -json
 
-# Удалить сессию
-agent-deck rm "Название"
+# Remove a session
+agent-deck rm "Name"
 ```
 
 ---
 
-## Важные правила
+## Important rules
 
-1. **Флаги перед аргументами:** `session show -json name` (не `session show name -json`)
-2. **После mcp attach** обязательно `session restart` для применения изменений
-3. **Избегать polling** результатов из других агентов — это может мешать целевой сессии
-4. **Идентификация сессии:** можно использовать название, ID (≥6 символов) или путь
+1. **Flags before arguments:** `session show -json name` (not `session show name -json`)
+2. **After mcp attach** you must run `session restart` to apply the changes
+3. **Avoid polling** results from other agents: it can interfere with the target session
+4. **Session identification:** you can use the name, the ID (6+ characters) or the path
 
 ---
 
-## Примеры использования
+## Usage examples
 
-### Запуск исследовательского агента
+### Launching a research agent
 
 ```bash
-# Создать агента для веб-исследования
+# Create an agent for web research
 agent-deck add -t "Researcher" -c claude --mcp exa /tmp/research
 agent-deck session start "Researcher"
-agent-deck session send "Researcher" "Найди информацию о последних трендах в AI"
+agent-deck session send "Researcher" "Find information about the latest AI trends"
 ```
 
-### Проверка готовности
+### Checking readiness
 
 ```bash
-# Проверить статус
+# Check the status
 agent-deck session show "Researcher"
 
-# Если статус ◐ (waiting) — агент закончил, получить результат:
+# If the status is ◐ (waiting), the agent has finished; get the result:
 agent-deck session output "Researcher"
 ```

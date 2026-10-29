@@ -1,15 +1,15 @@
 # docx-contracts
 
-> Этот скилл переехал в новую структуру плагинов.
+> This skill has moved to the new plugin structure.
 
-**Новое расположение:** [plugins/docx-contracts/skills/docx-contracts](../plugins/docx-contracts/skills/docx-contracts)
+**New location:** [plugins/docx-contracts/skills/docx-contracts](../plugins/docx-contracts/skills/docx-contracts)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально (для всех проектов)
+# Globally (for all projects)
 cp -r ../plugins/docx-contracts/skills/docx-contracts ~/.claude/skills/
 
-# Или для конкретного проекта
+# Or for a specific project
 cp -r ../plugins/docx-contracts/skills/docx-contracts .claude/skills/
 ```

@@ -1,15 +1,15 @@
 # genome-analizer
 
-> **Этот скилл переехал!**
+> **This skill has moved!**
 
-Новое расположение: [plugins/genome-analizer/skills/genome-analizer/SKILL.md](../plugins/genome-analizer/skills/genome-analizer/SKILL.md)
+New location: [plugins/genome-analizer/skills/genome-analizer/SKILL.md](../plugins/genome-analizer/skills/genome-analizer/SKILL.md)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально
+# Globally
 cp -r plugins/genome-analizer/skills/genome-analizer ~/.claude/skills/
 
-# Для проекта
+# For a project
 cp -r plugins/genome-analizer/skills/genome-analizer .claude/skills/
 ```

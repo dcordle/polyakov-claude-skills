@@ -1,15 +1,15 @@
 # docx-contracts
 
-> **Этот скилл переехал!**
+> **This skill has moved!**
 
-Новое расположение: [plugins/docx-contracts/skills/docx-contracts/SKILL.md](../plugins/docx-contracts/skills/docx-contracts/SKILL.md)
+New location: [plugins/docx-contracts/skills/docx-contracts/SKILL.md](../plugins/docx-contracts/skills/docx-contracts/SKILL.md)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально
+# Globally
 cp -r plugins/docx-contracts/skills/docx-contracts ~/.claude/skills/
 
-# Для проекта
+# For a project
 cp -r plugins/docx-contracts/skills/docx-contracts .claude/skills/
 ```

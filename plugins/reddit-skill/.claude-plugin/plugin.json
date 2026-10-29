@@ -1,7 +1,7 @@
 {
   "name": "reddit-skill",
   "version": "1.1.1",
-  "description": "Reddit: чтение без ключей через веб-инструмент агента, публичный JSON и RSS. Скрипты с кешем, OAuth2 и защищённые операции записи.",
+  "description": "Reddit: keyless reading through the agent's web tool, public JSON and RSS. Scripts with a cache, OAuth2 and guarded write operations.",
   "author": {
     "name": "Polyakov"
   }
