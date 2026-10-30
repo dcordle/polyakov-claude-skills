@@ -1,94 +1,94 @@
 ---
-description: Анализ генетических данных по конкретному вопросу
-argument-hint: <вопрос о генетике>
+description: Analysis of genetic data for a specific question
+argument-hint: <genetics question>
 ---
 
 # Genome Analysis Request
 
-Проанализируй генетические данные пользователя по вопросу: **$ARGUMENTS**
+Analyze the user's genetic data for the question: **$ARGUMENTS**
 
-## VCF файл
-VCF файл находится в текущей директории. Имя может быть любым (*.vcf).
+## VCF file
+The VCF file is in the current directory. It can have any name (*.vcf).
 
-## Алгоритм выполнения
+## Algorithm
 
-### 0. Найти VCF файл
-Используй Glob для поиска VCF файла:
+### 0. Find the VCF file
+Use Glob to look for the VCF file:
 - `pattern`: `*.vcf`
 
-Если найдено несколько — спроси пользователя какой использовать.
-Если не найден — сообщи об ошибке.
+If several are found, ask the user which one to use.
+If none is found, report an error.
 
-### 1. Исследование темы
-Запусти агента для поиска релевантных SNP:
+### 1. Research the topic
+Launch an agent to find relevant SNPs:
 
 ```
 Task tool:
 - subagent_type: "general-purpose"
 - model: "sonnet"
-- prompt: "Найди SNP (rsID), связанные с темой: $ARGUMENTS.
-  Используй WebSearch для поиска в GWAS Catalog, SNPedia, научных статьях.
-  Верни список rsID с описанием эффектов каждого аллеля (какой аллель рисковый/защитный)."
+- prompt: "Find SNPs (rsIDs) related to the topic: $ARGUMENTS.
+  Use WebSearch to search GWAS Catalog, SNPedia and scientific papers.
+  Return a list of rsIDs with a description of the effect of each allele (which allele is risk/protective)."
 ```
 
-### 2. Поиск в геноме
-Используй Grep для поиска найденных rsID в VCF файле (путь из Шага 0):
-- Объедини все rsID через `|` в паттерн
-- Путь: VCF файл найденный в Шаге 0
+### 2. Search the genome
+Use Grep to look for the rsIDs found in the VCF file (path from Step 0):
+- Join all rsIDs with `|` into one pattern
+- Path: the VCF file found in Step 0
 
-### 3. Интерпретация
-Расшифруй генотипы:
-- `0/0` = REF/REF (гомозигота по референсу)
-- `0/1` = REF/ALT (гетерозигота)
-- `1/1` = ALT/ALT (гомозигота по альтернативе)
+### 3. Interpretation
+Decode the genotypes:
+- `0/0` = REF/REF (homozygous for the reference)
+- `0/1` = REF/ALT (heterozygous)
+- `1/1` = ALT/ALT (homozygous for the alternative)
 
-### 4. Формирование отчёта
+### 4. Building the report
 
-ВАЖНО: Отчёт должен быть визуально привлекательным! Используй этот шаблон:
+IMPORTANT: The report must be visually appealing! Use this template:
 
 ```markdown
-## [Эмодзи] [Тема анализа]
+## [Emoji] [Analysis topic]
 
-### Основные результаты
+### Main results
 
-| SNP | Ген | Твой генотип | Риск | Интерпретация |
-|-----|-----|--------------|------|---------------|
-| rs... | **GENE** | X/X | ✅/🟡/🔴 | Описание |
-
----
-
-### 📊 Что это значит
-
-**Твой профиль: [краткая характеристика]**
-
-**Сильные стороны:**
-- Пункт с объяснением
-
-**Зоны внимания:**
-- Пункт — что это значит на практике
+| SNP | Gene | Your genotype | Risk | Interpretation |
+|-----|------|---------------|------|----------------|
+| rs... | **GENE** | X/X | ✅/🟡/🔴 | Description |
 
 ---
 
-### 🎯 Практические рекомендации
+### 📊 What this means
 
-1. **Рекомендация** — почему важно
-2. **Рекомендация** — конкретный совет
+**Your profile: [short description]**
+
+**Strengths:**
+- Item with an explanation
+
+**Areas of attention:**
+- Item: what it means in practice
 
 ---
 
-### 📈 Итоговая оценка
+### 🎯 Practical recommendations
 
-| Аспект | Оценка |
+1. **Recommendation**: why it matters
+2. **Recommendation**: a specific tip
+
+---
+
+### 📈 Overall assessment
+
+| Aspect | Rating |
 |--------|--------|
 | ... | 🟢/🟡/🔴 |
 
 ---
 
-⚠️ **Дисклеймер**: Генетика — вероятности, не судьба. Это информационный анализ, не медицинская консультация.
+⚠️ **Disclaimer**: Genetics is probabilities, not destiny. This is an informational analysis, not medical advice.
 
-**Источники:** [SNPedia](https://snpedia.com), [GWAS Catalog](https://www.ebi.ac.uk/gwas/)
+**Sources:** [SNPedia](https://snpedia.com), [GWAS Catalog](https://www.ebi.ac.uk/gwas/)
 ```
 
-**Эмодзи для заголовков:** 🏃 спорт, ⚖️ вес, 🧠 психика, ☕ кофеин, 🍷 алкоголь, 🥛 питание, 💊 лекарства, ❤️ сердце
+**Emoji for headings:** 🏃 sport, ⚖️ weight, 🧠 mind, ☕ caffeine, 🍷 alcohol, 🥛 nutrition, 💊 medications, ❤️ heart
 
-**Эмодзи для рисков:** ✅ защитный, 🟢 нейтральный, 🟡 умеренный, ⚠️ внимание, 🔴 высокий
+**Emoji for risks:** ✅ protective, 🟢 neutral, 🟡 moderate, ⚠️ attention, 🔴 high

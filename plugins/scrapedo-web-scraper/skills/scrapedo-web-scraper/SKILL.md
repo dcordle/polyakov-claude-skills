@@ -1,41 +1,41 @@
 ---
 name: scrapedo-web-scraper
 description: |
-  Веб-скрапинг через Scrape.do. Обходит блокировки и CAPTCHA.
-  АВТОМАТИЧЕСКИ используй при ошибках WebFetch: 403, 401, 429,
+  Web scraping through Scrape.do. Bypasses blocks and CAPTCHAs.
+  Use AUTOMATICALLY when WebFetch fails with: 403, 401, 429,
   timeout, access denied, Cloudflare block.
 ---
 
 # Scrape.do Web Scraper
 
-Скрапинг веб-страниц через Scrape.do API. Используй когда обычный fetch не работает (блокировка, JavaScript).
+Scrape web pages through the Scrape.do API. Use it when a plain fetch does not work (blocking, JavaScript).
 
-## Использование
+## Usage
 
 ```bash
-# Получить текст страницы
+# Get the page text
 python scripts/scrape.py https://example.com
 
-# Получить HTML
+# Get the HTML
 python scripts/scrape.py --html https://example.com
 ```
 
-## Из Python
+## From Python
 
 ```python
 from scripts.scrape import fetch_via_scrapedo
 
 result = fetch_via_scrapedo('https://example.com')
 if result['success']:
-    print(result['content'])  # текст
-    # result['html'] — оригинальный HTML
+    print(result['content'])  # text
+    # result['html'] is the original HTML
 else:
-    print(result['content'])  # описание ошибки
+    print(result['content'])  # error description
 ```
 
-## Результат
+## Result
 
-- **Успех**: текст страницы (или HTML с `--html`)
-- **Ошибка**: понятное сообщение (нет токена / лимит / недоступно)
+- **Success**: the page text (or HTML with `--html`)
+- **Error**: a clear message (no token / limit reached / unavailable)
 
-Если вернулась ошибка — страница недоступна через этот метод.
+If an error comes back, the page is not reachable with this method.

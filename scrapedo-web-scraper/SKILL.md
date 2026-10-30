@@ -1,15 +1,15 @@
 # scrapedo-web-scraper
 
-> **Этот скилл переехал!**
+> **This skill has moved!**
 
-Новое расположение: [plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper/SKILL.md](../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper/SKILL.md)
+New location: [plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper/SKILL.md](../plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper/SKILL.md)
 
-## Быстрая установка
+## Quick install
 
 ```bash
-# Глобально
+# Globally
 cp -r plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper ~/.claude/skills/
 
-# Для проекта
+# For a project
 cp -r plugins/scrapedo-web-scraper/skills/scrapedo-web-scraper .claude/skills/
 ```

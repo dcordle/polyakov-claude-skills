@@ -1,7 +1,7 @@
 {
   "name": "yandex-direct",
   "version": "1.0.0",
-  "description": "Яндекс Директ: статистика по выбранным целям, анализ поисковых запросов, управление кампаниями, объявлениями и ставками с показом до/после.",
+  "description": "Yandex Direct: statistics by selected goals, search query analysis, management of campaigns, ads and bids with a before/after view.",
   "author": {
     "name": "Polyakov"
   }

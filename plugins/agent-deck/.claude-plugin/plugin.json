@@ -1,6 +1,6 @@
 {
   "name": "agent-deck",
-  "description": "Управление сессиями AI агентов через agent-deck CLI",
+  "description": "Managing AI agent sessions through the agent-deck CLI",
   "version": "1.0.0",
   "author": {
     "name": "Polyakov"

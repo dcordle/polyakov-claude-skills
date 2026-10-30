@@ -1,31 +1,31 @@
 # Security Guardian
 
-Система защитных хуков для Claude Code, позволяющая безопасно работать в режиме `--dangerously-skip-permissions`.
+A system of protective hooks for Claude Code that makes it safe to work in `--dangerously-skip-permissions` mode.
 
-## Философия защиты
+## Protection philosophy
 
-**Главный принцип: границы директорий важнее паттернов имён файлов.**
+**Main principle: directory boundaries matter more than filename patterns.**
 
-| Уровень | Защита | Надёжность |
-|---------|--------|------------|
-| **1. Границы директорий** | Любая операция за пределами проекта → блок | Высокая |
-| **2. Белый список путей** | Пользователь явно добавляет разрешённые директории | Высокая |
-| **3. Паттерны имён** | Дополнительный слой для типичных секретов внутри проекта | Средняя |
+| Level | Protection | Reliability |
+|-------|------------|-------------|
+| **1. Directory boundaries** | Any operation outside the project → block | High |
+| **2. Path allowlist** | The user explicitly adds permitted directories | High |
+| **3. Name patterns** | An extra layer for typical secrets inside the project | Medium |
 
-## Установка
+## Installation
 
-### 1. Установить зависимости
+### 1. Install dependencies
 
 ```bash
 cd .claude/hooks/security-guardian
 uv sync
-# или
+# or
 pip install -e .
 ```
 
-### 2. Добавить хуки в settings.json
+### 2. Add the hooks to settings.json
 
-Скопируйте содержимое `settings.template.json` в ваш `.claude/settings.json`:
+Copy the contents of `settings.template.json` into your `.claude/settings.json`:
 
 ```json
 {
@@ -46,9 +46,9 @@ pip install -e .
 }
 ```
 
-### 3. Настроить конфигурацию (опционально)
+### 3. Adjust the configuration (optional)
 
-Отредактируйте `config/security_config.yaml` под ваши нужды:
+Edit `config/security_config.yaml` to fit your needs:
 
 ```yaml
 directories:
@@ -57,40 +57,40 @@ directories:
     - "/tmp/claude"
 ```
 
-## Защиты
+## Protections
 
-### Границы директорий (PRIMARY)
-- Чтение/запись за пределами проекта → блок
-- Симлинки за пределы проекта → блок (через realpath)
-- Относительные пути типа `../../../etc` → блок
+### Directory boundaries (PRIMARY)
+- Reading/writing outside the project → block
+- Symlinks pointing outside the project → block (via realpath)
+- Relative paths like `../../../etc` → block
 
-### Git-операции
-- `git push --force` → блок (предложить `--force-with-lease`)
+### Git operations
+- `git push --force` → block (suggest `--force-with-lease`)
 - `git reset --hard` → confirm
 - `git branch -D` → confirm
-- `git clean -fd` → confirm (но `--dry-run` разрешён)
+- `git clean -fd` → confirm (but `--dry-run` is allowed)
 
-### Обход защиты
-- `eval` → блок
-- `$VAR` как команда → блок
-- `curl | bash` → блок
-- `sh -c "..."` → блок
+### Bypass attempts
+- `eval` → block
+- `$VAR` as a command → block
+- `curl | bash` → block
+- `sh -c "..."` → block
 
-### Скачивание файлов
-- Исполняемые файлы (.py, .sh, .exe) → дать команду пользователю
-- Архивы → разрешено, но распаковка контролируется
+### File downloads
+- Executable files (.py, .sh, .exe) → give the command to the user
+- Archives → allowed, but unpacking is controlled
 
-### Секреты
-- `.env` файлы → блок чтения
-- `.env.example` → разрешено
+### Secrets
+- `.env` files → reading is blocked
+- `.env.example` → allowed
 
-## Тестирование
+## Testing
 
 ```bash
 uv run -m pytest
 ```
 
-## Структура
+## Structure
 
 ```
 security-guardian/
@@ -99,28 +99,28 @@ security-guardian/
 ├── config/
 │   └── security_config.yaml
 ├── parsers/
-│   ├── bash_parser.py    # AST-парсинг через bashlex
-│   └── path_parser.py    # Резолв путей
+│   ├── bash_parser.py    # AST parsing via bashlex
+│   └── path_parser.py    # Path resolution
 ├── checks/
-│   ├── directory_check.py    # Границы директорий (PRIMARY)
-│   ├── git_check.py          # Git-операции
-│   ├── deletion_check.py     # Удаление файлов
-│   ├── bypass_check.py       # Обход защиты
-│   ├── download_check.py     # Скачивание файлов
-│   ├── unpack_check.py       # Распаковка архивов
+│   ├── directory_check.py    # Directory boundaries (PRIMARY)
+│   ├── git_check.py          # Git operations
+│   ├── deletion_check.py     # File deletion
+│   ├── bypass_check.py       # Bypass attempts
+│   ├── download_check.py     # File downloads
+│   ├── unpack_check.py       # Archive unpacking
 │   ├── execution_check.py    # chmod +x
-│   └── secrets_check.py      # Секреты
+│   └── secrets_check.py      # Secrets
 ├── handlers/
 │   ├── bash_handler.py
 │   ├── read_handler.py
 │   ├── write_handler.py
 │   └── glob_grep_handler.py
 └── messages/
-    └── guidance.py       # Подсказки для Claude
+    └── guidance.py       # Hints for Claude
 ```
 
-## Логирование
+## Logging
 
-Логи сохраняются в `~/.claude/logs/security-guardian/`.
+Logs are saved to `~/.claude/logs/security-guardian/`.
 
-Содержат только метаданные (команда, путь, причина блокировки), не содержат контент файлов.
+They contain only metadata (command, path, reason for blocking), not file contents.

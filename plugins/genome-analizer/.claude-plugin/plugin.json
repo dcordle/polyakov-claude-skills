@@ -1,6 +1,6 @@
 {
   "name": "genome-analizer",
-  "description": "Анализ генетических данных из VCF файла",
+  "description": "Analysis of genetic data from a VCF file",
   "version": "1.0.0",
   "author": {
     "name": "Polyakov"

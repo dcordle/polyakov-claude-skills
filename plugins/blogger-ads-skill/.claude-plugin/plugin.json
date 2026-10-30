@@ -1,6 +1,6 @@
 {
   "name": "blogger-ads-skill",
-  "description": "Сопровождение рекламных размещений: договор и приложения, счета, УПД, маркировка и напоминания",
+  "description": "Support for advertising placements: contract and appendices, invoices, UPD, labeling and reminders",
   "version": "1.0.0",
   "author": {"name": "Polyakov"}
 }

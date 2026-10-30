@@ -1,81 +1,81 @@
 # Codex Review Plugin
 
-Кросс-агентное ревью: Claude Code реализует, Codex (GPT) ревьюит.
+Cross-agent review: Claude Code implements, Codex (GPT) reviews.
 
-> **ВАЖНО!** Скрипты плагина хранят всё состояние (сессию, конфиг, журнал ревью) в директории `.codex-review/` **в корне вашего проекта**, а не рядом с собой. Директория `config/` внутри плагина — это только шаблон. Не редактируйте файлы в директории установки плагина (`~/.claude/plugins/...`) — они перезапишутся при обновлении.
+> **IMPORTANT!** The plugin scripts keep all state (session, config, review log) in the `.codex-review/` directory **at the root of your project**, not next to themselves. The `config/` directory inside the plugin is only a template. Do not edit files in the plugin installation directory (`~/.claude/plugins/...`): they are overwritten on update.
 
-## Установка
+## Installation
 
-### Вариант A: через marketplace (рекомендуется)
+### Option A: via marketplace (recommended)
 
-1. Добавь репозиторий как marketplace (один раз):
+1. Add the repository as a marketplace (once):
 
 ```bash
-# Из локальной директории
+# From a local directory
 claude plugin marketplace add /path/to/polyakov-claude-skills
 
-# Или из GitHub
+# Or from GitHub
 claude plugin marketplace add github:artwist-polyakov/polyakov-claude-skills
 ```
 
-2. Установи плагин:
+2. Install the plugin:
 
 ```bash
 claude plugin install codex-review@polyakov-claude-skills
 ```
 
-### Вариант B: для одной сессии
+### Option B: for a single session
 
 ```bash
 claude --plugin-dir /path/to/polyakov-claude-skills/plugins/codex-review
 ```
 
-### Зависимости
+### Dependencies
 
-Убедись, что `codex` CLI установлен:
+Make sure the `codex` CLI is installed:
 
 ```bash
 npm install -g @openai/codex
 ```
 
-## Настройка проекта
+## Project setup
 
 ### .gitignore
 
-Добавь в `.gitignore` (или `.git/info/exclude`) проекта:
+Add this to the project's `.gitignore` (or `.git/info/exclude`):
 
 ```
 .codex-review/
 ```
 
-Весь каталог, включая `notes/`, содержит локальное состояние ревью и не должен попадать в Git.
+The whole directory, including `notes/`, holds local review state and must not end up in Git.
 
-Если проект следовал прежней рекомендации и уже отслеживает `notes/`, после обновления `.gitignore` убери каталог только из индекса Git:
+If the project followed the earlier recommendation and already tracks `notes/`, after updating `.gitignore` remove the directory from the Git index only:
 
 ```bash
 git rm -r --cached --ignore-unmatch .codex-review/
 ```
 
-Локальные файлы сохранятся. Закоммить подготовленные удаления вместе с новым правилом `.gitignore`.
+The local files are kept. Commit the staged deletions together with the new `.gitignore` rule.
 
-### AGENTS.md (для Codex)
+### AGENTS.md (for Codex)
 
-Добавь в `AGENTS.md` проекта секцию:
+Add a section to the project's `AGENTS.md`:
 
 ```markdown
 ## Review Protocol
 
-Если ты выступаешь ревьювером (запущен через codex-review workflow):
-- Давай конкретный actionable фидбек
-- Можешь смотреть код/diff самостоятельно
-- Не запускай скрипты из skills/codex-review/ — ты ревьюер
-- Не заглядывай в .codex-review/archive/ — там артефакты прошлых сессий
-- После ревью запиши вердикт по пути, указанному в промпте ревью (одно слово: APPROVED или CHANGES_REQUESTED)
+If you act as a reviewer (launched via the codex-review workflow):
+- Give concrete, actionable feedback
+- You may inspect the code/diff yourself
+- Do not run scripts from skills/codex-review/: you are the reviewer
+- Do not look into .codex-review/archive/: it holds artifacts of past sessions
+- After the review, write the verdict to the path given in the review prompt (one word: APPROVED or CHANGES_REQUESTED)
 ```
 
 ### settings.local.json
 
-Добавь разрешения в `.claude/settings.local.json`:
+Add permissions to `.claude/settings.local.json`:
 
 ```json
 {
@@ -89,27 +89,27 @@ git rm -r --cached --ignore-unmatch .codex-review/
 }
 ```
 
-### Конфигурация (опционально)
+### Configuration (optional)
 
-Создай `.codex-review/config.env` в корне проекта:
+Create `.codex-review/config.env` at the project root:
 
 ```bash
-# Существующая сессия Codex (или используй init для создания новой)
+# Existing Codex session (or use init to create a new one)
 # CODEX_SESSION_ID=sess_your_session_id
 
-# Базовый вариант. Без строки используется модель из настроек Codex
-# или его текущий вариант по умолчанию.
+# Base option. Without this line, the model from the Codex settings
+# or its current default is used.
 CODEX_MODEL=gpt-5.5
 
-# Актуальное семейство GPT-5.6 — оставь один вариант вместо строки выше:
-# CODEX_MODEL=gpt-5.6-sol    # максимальное качество для сложных ревью
-# CODEX_MODEL=gpt-5.6-terra  # сбалансированный вариант на каждый день
-# CODEX_MODEL=gpt-5.6-luna   # быстрые и хорошо ограниченные задачи
+# Current GPT-5.6 family: keep one option instead of the line above:
+# CODEX_MODEL=gpt-5.6-sol    # maximum quality for complex reviews
+# CODEX_MODEL=gpt-5.6-terra  # balanced everyday option
+# CODEX_MODEL=gpt-5.6-luna   # fast, well-bounded tasks
 
-# Обычно: low, medium, high, xhigh; max поддерживают модели GPT-5.6.
+# Usually: low, medium, high, xhigh; max is supported by GPT-5.6 models.
 CODEX_REASONING_EFFORT=high
 
-# Ускоренный сервисный уровень. По умолчанию выключен.
+# Accelerated service tier. Off by default.
 CODEX_FAST_MODE=false
 
 CODEX_MAX_ITERATIONS=5
@@ -130,111 +130,111 @@ CODEX_YOLO=true
 # Additional guidance for code review phase (optional, appended to built-in focus areas)
 # CODEX_CODE_GUIDE="Check that all DB queries use parameterized statements"
 
-# Severity calibration (default: true) — see «Severity и вердикт» below.
+# Severity calibration (default: true) — see "Severity and verdict" below.
 # CODEX_SEVERITY_CALIBRATION=false
 ```
 
-`CODEX_FAST_MODE=true` передаёт `service_tier="fast"` при создании сессии и при каждом ревью. Режим сработает, если выбранная модель и учётная запись его поддерживают. При `false` или отсутствии настройки плагин не переопределяет сервисный уровень Codex.
+`CODEX_FAST_MODE=true` passes `service_tier="fast"` when the session is created and on every review. The mode takes effect if the selected model and account support it. With `false` or when the setting is absent, the plugin does not override the Codex service tier.
 
-### Severity и вердикт
+### Severity and verdict
 
-Ревьюер оценивает каждую находку как `critical`, `important` или `minor` и раскладывает находки по трём разделам ответа: `## Blocking` (`critical` и `important` в текущей работе), `## Non-blocking` (`minor` в текущей работе) и `## Pre-existing` (дефекты затронутого, но не изменённого кода — по той же шкале, с сохранением уровня).
+The reviewer rates each finding as `critical`, `important` or `minor` and sorts the findings into three sections of the response: `## Blocking` (`critical` and `important` in the current work), `## Non-blocking` (`minor` in the current work) and `## Pre-existing` (defects in code that was touched but not changed, on the same scale, keeping the level).
 
-`CHANGES_REQUESTED` приходит только при непустом `## Blocking`. `APPROVED` со списком в `## Non-blocking` — нормальный вердикт.
+`CHANGES_REQUESTED` is returned only when `## Blocking` is not empty. `APPROVED` with a list in `## Non-blocking` is a normal verdict.
 
-С третьего круга ревьюер отчитывается по блокерам прошлых кругов и открывает новую тему только уровня `critical`.
+From the third round on, the reviewer reports on the blockers of previous rounds and opens a new topic only at the `critical` level.
 
-`CODEX_SEVERITY_CALIBRATION=false` возвращает прежний промпт, где вердикт может удержать любое замечание.
+`CODEX_SEVERITY_CALIBRATION=false` restores the previous prompt, where the verdict can be held up by any remark.
 
-## Использование
+## Usage
 
-### Подключение существующей сессии Codex
+### Connecting an existing Codex session
 
-Если у вас уже есть живая сессия с Codex (например, вы обсуждали архитектуру), впишите её id в `.codex-review/config.env`:
+If you already have a live session with Codex (for example, you discussed the architecture), put its id into `.codex-review/config.env`:
 
 ```bash
-CODEX_SESSION_ID=sess_ваш_id
+CODEX_SESSION_ID=sess_your_id
 ```
 
-Альтернативно — через CLI: `bash scripts/codex-state.sh set session_id sess_ваш_id`
+Alternatively, via the CLI: `bash scripts/codex-state.sh set session_id sess_your_id`
 
-После этого команды `plan` и `code` будут отправлять ревью в эту сессию через `resume`.
+After that, the `plan` and `code` commands will send reviews to this session via `resume`.
 
-### Создание новой сессии
+### Creating a new session
 
 ```
-"Используем workflow с codex ревьювером. Задачи: #23, #10"
+"Используем workflow с codex ревьювером. Задачи: #23, #10" (We use the workflow with the Codex reviewer. Tasks: #23, #10)
 ```
 
-Claude вызывает `init` — создаётся сессия Codex. По умолчанию init лёгкий (Codex подтверждает готовность). С `CODEX_REVIEWER_PROMPT` в config.env init выполняет кастомную процедуру (например, исследование кодовой базы). Роль ревьюера задаётся автоматически. Затем `plan` и `code` отправляют ревью в эту сессию через `resume`.
+Claude calls `init`, which creates a Codex session. By default init is lightweight (Codex confirms it is ready). With `CODEX_REVIEWER_PROMPT` in config.env, init runs a custom procedure (for example, exploring the codebase). The reviewer role is set automatically. Then `plan` and `code` send reviews to this session via `resume`.
 
 ### Workflow
 
-1. **Init** — Claude создаёт сессию Codex (`init`)
-2. **Plan Review** — Claude описывает план, Codex ревьюит (`plan`)
-3. **Implementation** — Claude реализует по одобренному плану
-4. **Code Review** — Claude описывает изменения, Codex ревьюит (`code`)
-5. **Done** — результат пользователю
+1. **Init** - Claude creates a Codex session (`init`)
+2. **Plan Review** - Claude describes the plan, Codex reviews it (`plan`)
+3. **Implementation** - Claude implements according to the approved plan
+4. **Code Review** - Claude describes the changes, Codex reviews them (`code`)
+5. **Done** - the result goes to the user
 
-### Управление состоянием
+### State management
 
 ```bash
-bash scripts/codex-state.sh show          # Текущее состояние
-bash scripts/codex-state.sh dir           # Путь к state-каталогу текущей ветки
-bash scripts/codex-state.sh reset         # Сброс итераций
-bash scripts/codex-state.sh reset --full  # Полный сброс
-bash scripts/codex-state.sh set session_id <value>  # Ручная установка
-bash scripts/codex-state.sh set phase implementing  # Обновить фазу
-bash scripts/codex-state.sh set iteration 2        # Откатить счётчик кругов
+bash scripts/codex-state.sh show          # Current state
+bash scripts/codex-state.sh dir           # Path to the current branch's state directory
+bash scripts/codex-state.sh reset         # Reset iterations
+bash scripts/codex-state.sh reset --full  # Full reset
+bash scripts/codex-state.sh set session_id <value>  # Set manually
+bash scripts/codex-state.sh set phase implementing  # Update the phase
+bash scripts/codex-state.sh set iteration 2        # Roll back the round counter
 ```
 
-Записываемые поля: `session_id`, `phase`, `iteration`, `max_iterations`,
+Writable fields: `session_id`, `phase`, `iteration`, `max_iterations`,
 `reviews_completed`, `last_review_status`, `last_review_timestamp`,
-`task_description`. Неизвестное имя поля, нецелое значение счётчика и значение
-с кавычкой, обратным слэшем, переводом строки или табуляцией — ошибка с кодом
-возврата 1, состояние не меняется.
+`task_description`. An unknown field name, a non-integer counter value, and a value
+containing a quote, backslash, newline or tab is an error with return
+code 1, and the state is not changed.
 
-## Структура .codex-review/
+## Structure of .codex-review/
 
-В корне основного репо (не worktree) создается директория с per-branch изоляцией. Всё её содержимое локальное:
+A directory with per-branch isolation is created at the root of the main repo (not a worktree). All of its content is local:
 
 ```
 .codex-review/
-├── config.env                  # общие локальные настройки проекта
+├── config.env                  # shared local project settings
 ├── .gitkeep
-├── archive/                    # локальный архив всех сессий
-│   └── {timestamp}/            # артефакты одной сессии (branch в summary.json)
-├── feat-auth/                  # per-branch state (имя ветки, / → -)
-│   ├── state.json              # транзиентное состояние
-│   ├── STATUS.md               # автогенерируемый статус для Claude
-│   ├── verdict.txt             # последний вердикт от Codex
-│   ├── last_response.txt       # последний ответ Codex
-│   ├── current_session.txt     # привязка вердикта к сессии Claude
-│   ├── codex-init.log          # лог инициализации сессии
-│   ├── codex-init.request.md   # текст задачи, отправленный в сессию
-│   ├── codex-init.prompt.md    # промпт, который получил Codex
-│   ├── codex-{phase}-{N}.log   # логи итераций ревью
-│   ├── codex-{phase}-{N}.request.md  # текст, отправленный на итерацию
-│   ├── codex-{phase}-{N}.prompt.md   # промпт, который получил Codex
-│   ├── plan.md                 # копия последнего плана, ушедшего на ревью
-│   └── notes/                  # локальный журнал текущего ревью
+├── archive/                    # local archive of all sessions
+│   └── {timestamp}/            # artifacts of one session (branch in summary.json)
+├── feat-auth/                  # per-branch state (branch name, / → -)
+│   ├── state.json              # transient state
+│   ├── STATUS.md               # auto-generated status for Claude
+│   ├── verdict.txt             # latest verdict from Codex
+│   ├── last_response.txt       # latest Codex response
+│   ├── current_session.txt     # binding of the verdict to the Claude session
+│   ├── codex-init.log          # session initialization log
+│   ├── codex-init.request.md   # task text sent to the session
+│   ├── codex-init.prompt.md    # prompt that Codex received
+│   ├── codex-{phase}-{N}.log   # review iteration logs
+│   ├── codex-{phase}-{N}.request.md  # text sent for the iteration
+│   ├── codex-{phase}-{N}.prompt.md   # prompt that Codex received
+│   ├── plan.md                 # copy of the last plan sent for review
+│   └── notes/                  # local log of the current review
 │       ├── .gitkeep
 │       ├── plan-review-1.md
 │       └── code-review-1.md
-└── feat-ui/                    # другая ветка — полная изоляция
+└── feat-ui/                    # another branch: full isolation
     └── ...
 ```
 
 ## CLAUDE.md
 
-Добавь в CLAUDE.md проекта (одноразовая настройка):
+Add this to the project's CLAUDE.md (one-time setup):
 
 ```markdown
 ## Codex Review
 Check for `.codex-review/*/STATUS.md` — if a STATUS.md exists for the current branch, read it before starting work (an active review is in progress).
 ```
 
-`STATUS.md` создаётся и обновляется автоматически скриптами плагина в state-каталоге ветки (путь: `codex-state.sh dir`). Наличие файла означает активное ревью, отсутствие — ревью не идёт или завершено.
+`STATUS.md` is created and updated automatically by the plugin scripts in the branch's state directory (path: `codex-state.sh dir`). The presence of the file means a review is active, its absence means no review is running or it has finished.
 
 ## Git Worktree Support
 
@@ -255,10 +255,10 @@ When `AUTO_REVIEW=true` in `.codex-review/config.env`, the plugin enforces autom
 
 No additional configuration needed — the hook is declared in `plugin.json` and auto-registered when the plugin is enabled.
 
-## Анти-рекурсия
+## Anti-recursion
 
-Плагин защищен от рекурсивного вызова на 3 уровнях:
+The plugin is protected against recursive invocation at 3 levels:
 
-1. **Env guard** — `CODEX_REVIEWER=1` при вызове codex exec; если скрипт вызван с этой переменной — exit 1
-2. **Промпт-контекст** — путь к скиллу в промпте для ориентации
-3. **AGENTS.md** — инструкция для Codex о роли ревьюера
+1. **Env guard** - `CODEX_REVIEWER=1` when calling codex exec; if the script is called with this variable, it exits with 1
+2. **Prompt context** - the skill path in the prompt, for orientation
+3. **AGENTS.md** - an instruction for Codex about the reviewer role

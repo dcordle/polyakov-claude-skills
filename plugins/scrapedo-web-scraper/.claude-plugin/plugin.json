@@ -1,6 +1,6 @@
 {
   "name": "scrapedo-web-scraper",
-  "description": "Веб-скрапинг через Scrape.do с обходом защит и JavaScript рендерингом",
+  "description": "Web scraping through Scrape.do with bot-protection bypass and JavaScript rendering",
   "version": "1.0.0",
   "author": {
     "name": "Polyakov"
